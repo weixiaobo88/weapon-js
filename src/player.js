@@ -5,19 +5,44 @@ function Player() {
 }
 
 function Player(playerInfo) {
-	this.name = playerInfo.name;
-	this.blood = playerInfo.blood;
-	this.attack = playerInfo.attack;
+	var name = playerInfo.name,
+		blood = playerInfo.blood,
+		attack = playerInfo.attack;
+
+	this.getName = function() {
+		return name;
+	}
+	this.getBlood = function() {
+		return blood;
+	}
+	this.getAttack = function() {
+		return attack;
+	}
 }
 
-Player.prototype.getName = function() {
-	return this.name;
+var Visitor = {};
+Visitor.fightResult = function() {
+	return arguments[0].getName() + '被打败了';
 }
 
-Player.prototype.getBlood = function() {
-	return this.blood;
-}
+Player.prototype.fight = function(playerB) {
+	var playerA = this;
+	var bloodOfA = playerA.getBlood(),
+		bloodOfB = playerB.getBlood(),
+		fightResult = Visitor.fightResult;
 
-Player.prototype.getAttack = function() {
-	return this.attack;
+	while (bloodOfA > 0 && bloodOfB > 0) {
+		bloodOfA -= playerB.getAttack();
+		bloodOfB -= playerA.getAttack();
+
+		if (bloodOfA <= 0 && bloodOfA < bloodOfB) {
+			fightResult = fightResult(playerA);
+		};
+		if (bloodOfB <= 0 && bloodOfB < bloodOfA) {
+			fightResult = fightResult(playerB);
+		};
+	}
+
+	console.log(fightResult);
+	return fightResult;
 }
