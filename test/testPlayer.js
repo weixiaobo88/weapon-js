@@ -32,10 +32,4 @@ describe('Player\'s ', function() {
 			assert.equal(9, playerA.getAttack());
 		});
 	});
-
-	describe('begin fight:', function() {
-		it('should return playerB failed: ', function() {
-			assert.equal('李四被打败了', playerA.fight(playerB));
-		});
-	});
 });
