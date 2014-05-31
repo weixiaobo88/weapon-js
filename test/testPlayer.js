@@ -21,15 +21,15 @@ describe('Player\'s ', function() {
 
 	describe('info :', function() {
 		it('should return 张三 as playerA name: ', function() {
-			assert.equal('张三', playerA.getName());
+			assert.equal('张三', playerAInfo.name);
 		});
 
 		it('should return 100 as playerA blood: ', function() {
-			assert.equal(100, playerA.getBlood());
+			assert.equal(100, playerAInfo.blood);
 		});
 
 		it('should return 9 as playerA attack', function() {
-			assert.equal(9, playerA.getAttack());
+			assert.equal(9, playerAInfo.attack);
 		});
 	});
 });

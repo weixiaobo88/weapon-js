@@ -5,23 +5,13 @@ function Player() {
 }
 
 function Player(playerInfo) {
-	var name = playerInfo.name,
-		blood = playerInfo.blood,
-		attack = playerInfo.attack;
+	this._name = playerInfo.name;
+	this._blood = playerInfo.blood;
+	this._attack = playerInfo.attack;
+}
 
-	this.getName = function() {
-		return name;
-	}
-	this.getBlood = function() {
-		return blood;
-	}
-	this.getAttack = function() {
-		return attack;
-	}
-
-	this.attack = function(player) {
-		blood = player.getBlood() - this.getAttack();
-	}
+Player.prototype.attack = function(player) {
+	this._blood = player._blood - this._attack;
 }
 
 Player.prototype.fight = function(playerB) {
@@ -36,7 +26,7 @@ Player.prototype.fight = function(playerB) {
 }
 
 Player.prototype.alive = function() {
-	if (this.getBlood() > 0) {
+	if (this._blood > 0) {
 		return true;
 	};
 	return false;

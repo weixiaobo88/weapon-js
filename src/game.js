@@ -28,5 +28,5 @@ Game.prototype.start = function() {
 		playerA.fight(playerB);
 	}
 
-	printer(playerA.alive() ? playerB.getName() : playerAgetName());
+	printer(playerA.alive() ? playerBInfo.name : playerAInfo.name);
 }
