@@ -16,8 +16,7 @@ describe('Game start: ', function() {
 	describe('two players begin to fight:', function() {
 		it('should return playerB failed: ', function() {
 			(new Game()).start();
-			sinon.assert.calledOnce(console.log);
-			sinon.assert.calledWithExactly(console.log, "李四被打败了");
+			sinon.assert.calledWith(console.log, "李四被打败了");
 		});
 	});
 });

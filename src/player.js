@@ -10,8 +10,23 @@ function Player(playerInfo) {
 	this._attack = playerInfo.attack;
 }
 
+var printAttack = function(attackMsg) {
+	console.log(attackMsg.attacker + "攻击了" + attackMsg.attackee + "," +
+		attackMsg.attackee + "受到了" + attackMsg.injury + "点伤害," +
+		attackMsg.attackee + "剩余生命：" + attackMsg.blood);
+}
+
 Player.prototype.attack = function(player) {
-	this._blood = player._blood - this._attack;
+	player._blood -= this._attack;
+
+	var attackMsg = {
+		attacker: this._name,
+		attackee: player._name,
+		injury: this._attack,
+		blood: player._blood
+	};
+
+	printAttack(attackMsg);
 }
 
 Player.prototype.fight = function(playerB) {
