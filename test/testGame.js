@@ -13,18 +13,6 @@ afterEach(function() {
 });
 
 describe('Game start: ', function() {
-	var playerA, playerB, game;
-	var playerAInfo = {
-		name: '张三',
-		blood: 100,
-		attack: 9
-	},
-		playerBInfo = {
-			name: '李四',
-			blood: 100,
-			attack: 8
-		};
-
 	describe('two players begin to fight:', function() {
 		it('should return playerB failed: ', function() {
 			(new Game()).start();
