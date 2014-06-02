@@ -4,10 +4,16 @@ function Player() {
 
 }
 
+var CAREER = {
+	NORMAL: "normal",
+	WARRIOR: "warrior"
+};
+
 function Player(playerInfo) {
 	this._name = playerInfo.name;
 	this._blood = playerInfo.blood;
 	this._attack = playerInfo.attack;
+	this._career = "normal";
 }
 
 var printAttack = function(attackMsg) {
