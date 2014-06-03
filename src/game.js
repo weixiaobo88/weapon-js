@@ -1,32 +1,38 @@
 module.exports = Game;
 var Player = require("../src/player.js");
+var FightDetail = require("../src/fightDetail.js");
 
 function Game() {}
 
+var printer = function(msg) {
+	console.log(msg);
+};
 
-var printer = function(name) {
-	console.log(name + '被打败了');
+function Game(playerAInfo, playerBInfo) {
+	this._playerAInfo = playerAInfo;
+	this._playerBInfo = playerBInfo;
+	this._playerA = new Player(playerAInfo);
+	this._playerB = new Player(playerBInfo);
 }
 
-
 Game.prototype.start = function() {
-	var playerA, playerB;
-	var playerAInfo = {
-		name: '张三',
-		blood: 100,
-		attack: 9
-	},
-		playerBInfo = {
-			name: '李四',
-			blood: 100,
-			attack: 8
-		};
-	playerA = new Player(playerAInfo);
-	playerB = new Player(playerBInfo);
+	var playerA, playerB, attackInfo, attackMsg, attackResult, fightDetail;
+
+	playerA = this._playerA;
+	playerB = this._playerB;
+	fightDetail = new FightDetail();
 
 	while (playerA.alive() && playerB.alive()) {
-		playerA.fight(playerB);
+		if (playerA.alive()) {
+			attackInfo = playerA.attack(playerB);
+		}
+		if (playerB.alive()) {
+			attackInfo = playerB.attack(playerA);
+		}
+		attackMsg = fightDetail.generateAttackMsg(attackInfo);
+		printer(attackMsg);
 	}
 
-	printer(playerA.alive() ? playerBInfo.name : playerAInfo.name);
+	attackResult = fightDetail.generateAttackResult(playerA.alive() ? this._playerBInfo.name : this._playerAInfo.name);
+	printer(attackResult);
 }
