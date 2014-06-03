@@ -2,16 +2,11 @@ module.exports = Player;
 
 function Player() {}
 
-var CAREER = {
-	NORMAL: "normal",
-	WARRIOR: "warrior"
-};
-
 function Player(playerInfo) {
 	this._name = playerInfo.name;
 	this._blood = playerInfo.blood;
 	this._attackPoint = playerInfo.attackPoint;
-	this._career = "normal";
+	this._career = playerInfo.career;
 }
 
 Player.prototype.attack = function(player) {
@@ -21,7 +16,10 @@ Player.prototype.attack = function(player) {
 		attacker: this._name,
 		attackee: player._name,
 		injury: this._attackPoint,
-		blood: player._blood
+		blood: player._blood,
+		attackerCareer: this._career,
+		attackeeCareer: player._career,
+		attackerWeapon: this._weapon
 	};
 }
 
