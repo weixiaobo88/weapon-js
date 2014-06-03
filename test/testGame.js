@@ -21,7 +21,6 @@ describe('Game: ', function() {
 	beforeEach(function() {
 		this.sinon = sinon.sandbox.create();
 		this.sinon.spy(console, "log");
-		// this.sinon.spy(Player.attack);
 	});
 
 	afterEach(function() {
@@ -32,9 +31,6 @@ describe('Game: ', function() {
 		it('should return playerB failed: ', function() {
 			game.start();
 			sinon.assert.calledWith(console.log, "李四被打败了");
-			// sinon.assert.calledOnce();
-			// sinon.assert.callOrder(Player.attack, FightDetail.generateAttackResult);
-			// sinon.spy.assert.calledBefore(FightDetail.generateAttackMsg);
 		});
 	});
 
