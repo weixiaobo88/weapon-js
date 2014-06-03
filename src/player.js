@@ -1,43 +1,22 @@
 module.exports = Player;
 
-function Player() {
-
-}
+function Player() {}
 
 function Player(playerInfo) {
 	this._name = playerInfo.name;
 	this._blood = playerInfo.blood;
-	this._attack = playerInfo.attack;
-}
-
-var printAttack = function(attackMsg) {
-	console.log(attackMsg.attacker + "攻击了" + attackMsg.attackee + "," +
-		attackMsg.attackee + "受到了" + attackMsg.injury + "点伤害," +
-		attackMsg.attackee + "剩余生命：" + attackMsg.blood);
+	this._attackPoint = playerInfo.attackPoint;
 }
 
 Player.prototype.attack = function(player) {
-	player._blood -= this._attack;
+	player._blood -= this._attackPoint;
 
-	var attackMsg = {
+	return {
 		attacker: this._name,
 		attackee: player._name,
-		injury: this._attack,
+		injury: this._attackPoint,
 		blood: player._blood
 	};
-
-	printAttack(attackMsg);
-}
-
-Player.prototype.fight = function(playerB) {
-	var playerA = this;
-
-	if (playerA.alive()) {
-		playerA.attack(playerB);
-	}
-	if (playerB.alive()) {
-		playerB.attack(playerA);
-	}
 }
 
 Player.prototype.alive = function() {

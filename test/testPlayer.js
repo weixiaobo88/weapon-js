@@ -7,19 +7,18 @@ describe('Player\'s ', function() {
 	var playerAInfo = {
 		name: '张三',
 		blood: 100,
-		attack: 9
+		attackPoint: 9
 	},
 		playerBInfo = {
 			name: '李四',
 			blood: 100,
-			attack: 8
+			attackPoint: 8
 		};
 
 	beforeEach(function() {
 		playerA = new Player(playerAInfo);
 		playerB = new Player(playerBInfo);
 		this.sinon = sinon.sandbox.create();
-		this.sinon.stub(console, "log");
 	});
 
 
@@ -36,15 +35,9 @@ describe('Player\'s ', function() {
 			assert.equal(100, playerAInfo.blood);
 		});
 
-		it('should return 9 as playerA attack', function() {
-			assert.equal(9, playerAInfo.attack);
+		it('should return 9 as playerA attackPoint', function() {
+			assert.equal(9, playerAInfo.attackPoint);
 		});
 	});
 
-	describe("fight: ", function() {
-		it('should return fight msg: ', function() {
-			playerA.fight(playerB);
-			sinon.assert.calledWith(console.log, "张三攻击了李四,李四受到了9点伤害,李四剩余生命：91");
-		});
-	});
 });

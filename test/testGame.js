@@ -1,22 +1,41 @@
 var assert = require("assert");
 var sinon = require("sinon");
+
 var Game = require("../src/game.js");
 var Player = require("../src/player.js");
+var FightDetail = require("../src/fightDetail.js");
 
-beforeEach(function() {
-	this.sinon = sinon.sandbox.create();
-	this.sinon.stub(console, "log");
-});
+describe('Game: ', function() {
+	var playerAInfo = {
+		name: '张三',
+		blood: 10,
+		attackPoint: 9
+	},
+		playerBInfo = {
+			name: '李四',
+			blood: 10,
+			attackPoint: 8
+		};
+	var game = new Game(playerAInfo, playerBInfo);
 
-afterEach(function() {
-	this.sinon.restore();
-});
+	beforeEach(function() {
+		this.sinon = sinon.sandbox.create();
+		this.sinon.spy(console, "log");
+		// this.sinon.spy(Player.attack);
+	});
 
-describe('Game start: ', function() {
+	afterEach(function() {
+		this.sinon.restore();
+	});
+
 	describe('two players begin to fight:', function() {
 		it('should return playerB failed: ', function() {
-			(new Game()).start();
+			game.start();
 			sinon.assert.calledWith(console.log, "李四被打败了");
+			// sinon.assert.calledOnce();
+			// sinon.assert.callOrder(Player.attack, FightDetail.generateAttackResult);
+			// sinon.spy.assert.calledBefore(FightDetail.generateAttackMsg);
 		});
 	});
+
 });
