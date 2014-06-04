@@ -18,12 +18,6 @@ describe('Player\'s ', function() {
 	beforeEach(function() {
 		playerA = new Player(playerAInfo);
 		playerB = new Player(playerBInfo);
-		this.sinon = sinon.sandbox.create();
-	});
-
-
-	afterEach(function() {
-		this.sinon.restore();
 	});
 
 	describe('info :', function() {
@@ -37,6 +31,53 @@ describe('Player\'s ', function() {
 
 		it('should return 9 as playerA attackPoint', function() {
 			assert.equal(9, playerAInfo.attackPoint);
+		});
+
+		it('should return attack detail once playerA attack playerB', function() {
+			var fightDetail = playerA.attack(playerB);
+			assert.equal('张三', fightDetail.attacker);
+			assert.equal('李四', fightDetail.attackee);
+			assert.equal('9', fightDetail.injury);
+			assert.equal('91', fightDetail.blood);
+
+			fightDetail = playerB.attack(playerA);
+
+			assert.equal('李四', fightDetail.attacker);
+			assert.equal('张三', fightDetail.attackee);
+			assert.equal('8', fightDetail.injury);
+			assert.equal('92', fightDetail.blood);
+		});
+
+		it('should return player is not alive when blood is not larger than 0', function() {
+			playerA = new Player({
+				name: '张三',
+				blood: 0,
+				attackPoint: 9
+			});
+			assert.equal(false, playerA.alive());
+
+			playerB = new Player({
+				name: '李四',
+				blood: -2,
+				attackPoint: 9
+			});
+			assert.equal(false, playerA.alive());
+		});
+
+		it('should return player is not alive when blood is not larger than 0 after attacked', function() {
+			playerA = new Player({
+				name: '张三',
+				blood: 10,
+				attackPoint: 10
+			});
+			playerB = new Player({
+				name: '李四',
+				blood: 10,
+				attackPoint: 8
+			});
+			playerA.attack(playerB);
+			assert.equal(true, playerA.alive());
+			assert.equal(false, playerB.alive());
 		});
 	});
 

@@ -8,11 +8,9 @@ var printer = function(msg) {
 	console.log(msg);
 };
 
-function Game(playerAInfo, playerBInfo) {
-	this._playerAInfo = playerAInfo;
-	this._playerBInfo = playerBInfo;
-	this._playerA = new Player(playerAInfo);
-	this._playerB = new Player(playerBInfo);
+function Game(playerA, playerB) {
+	this._playerA = playerA;
+	this._playerB = playerB;
 }
 
 Game.prototype.start = function() {
@@ -25,14 +23,16 @@ Game.prototype.start = function() {
 	while (playerA.alive() && playerB.alive()) {
 		if (playerA.alive()) {
 			attackInfo = playerA.attack(playerB);
+			attackMsg = fightDetail.generateAttackMsg(attackInfo);
+			printer(attackMsg);
 		}
 		if (playerB.alive()) {
 			attackInfo = playerB.attack(playerA);
+			attackMsg = fightDetail.generateAttackMsg(attackInfo);
+			printer(attackMsg);
 		}
-		attackMsg = fightDetail.generateAttackMsg(attackInfo);
-		printer(attackMsg);
 	}
 
-	attackResult = fightDetail.generateAttackResult(playerA.alive() ? this._playerBInfo.name : this._playerAInfo.name);
+	attackResult = fightDetail.generateAttackResult(playerA.alive() ? attackInfo.attackee : attackInfo.attacker);
 	printer(attackResult);
 }
