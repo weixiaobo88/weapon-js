@@ -10,16 +10,19 @@ function Player(playerInfo) {
 }
 
 Player.prototype.attack = function(player) {
-	player._blood -= this._attackPoint;
+	var armorDefense = 0;
+	if (typeof player._armor != 'undefined') {
+		armorDefense = player._armor.defense;
+	};
+	player._blood -= this._attackPoint - armorDefense;
 
 	return {
 		attacker: this._name,
 		attackee: player._name,
-		injury: this._attackPoint,
-		blood: player._blood,
+		attackeeInjury: this._attackPoint - armorDefense,
+		attackeeBlood: player._blood,
 		attackerCareer: this._career,
-		attackeeCareer: player._career,
-		attackerWeapon: this._weapon
+		attackeeCareer: player._career
 	};
 }
 

@@ -7,21 +7,24 @@ FightDetail.prototype.generateAttackResult = function(name) {
 }
 
 FightDetail.prototype.generateAttackMsg = function(attackInfo) {
-	var attackMsg = attackInfo.attacker + "攻击了" + attackInfo.attackee + "," +
-		attackInfo.attackee + "受到了" + attackInfo.injury + "点伤害," +
-		attackInfo.attackee + "剩余生命：" + attackInfo.blood;
-
-	return attackMsg;
-}
-
-FightDetail.prototype.generateAttackMsgWithCareer = function(attackInfo) {
 	var useWeapon = "";
+	var attackerCareer = "";
+	var attackeeCareer = "";
 	if (attackInfo.attackerWeapon) {
 		useWeapon = "用" + attackInfo.attackerWeapon.name;
 	};
-	var attackMsg = attackInfo.attackerCareer + attackInfo.attacker + useWeapon + "攻击了" + attackInfo.attackeeCareer + attackInfo.attackee + "," +
-		attackInfo.attackee + "受到了" + attackInfo.injury + "点伤害," +
-		attackInfo.attackee + "剩余生命：" + attackInfo.blood;
+	if (attackInfo.attackerCareer) {
+		attackerCareer = attackInfo.attackerCareer;
+	};
+	if (attackInfo.attackeeCareer) {
+		attackeeCareer = attackInfo.attackeeCareer;
+	};
 
+	var part1, part2, part3;
+	part1 = attackerCareer + attackInfo.attacker + useWeapon + "攻击了" + attackeeCareer + attackInfo.attackee + ",";
+	part2 = attackInfo.attackee + "受到了" + attackInfo.attackeeInjury + "点伤害,";
+	part3 = attackInfo.attackee + "剩余生命：" + attackInfo.attackeeBlood;
+
+	var attackMsg = part1 + part2 + part3;
 	return attackMsg;
 }

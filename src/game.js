@@ -19,21 +19,19 @@ Game.prototype.start = function() {
 	playerA = this._playerA;
 	playerB = this._playerB;
 	fightDetail = new FightDetail();
-
 	while (playerA.alive() && playerB.alive()) {
 		if (playerA.alive()) {
 			attackInfo = playerA.attack(playerB);
-			attackMsg = fightDetail.generateAttackMsgWithCareer(attackInfo);
+			attackMsg = fightDetail.generateAttackMsg(attackInfo);
 			printer(attackMsg);
 		}
 		if (playerB.alive()) {
 			attackInfo = playerB.attack(playerA);
 			attackMsg = fightDetail.generateAttackMsg(attackInfo);
-			attackMsg = fightDetail.generateAttackMsgWithCareer(attackInfo);
 			printer(attackMsg);
 		}
 	}
 
-	attackResult = fightDetail.generateAttackResult(playerA.alive() ? attackInfo.attackee : attackInfo.attacker);
+	attackResult = fightDetail.generateAttackResult(attackInfo.attackeeBlood > 0 ? attackInfo.attacker : attackInfo.attackee);
 	printer(attackResult);
 }

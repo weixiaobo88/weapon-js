@@ -1,16 +1,34 @@
 module.exports = Warrior;
 var Player = require("../src/Player.js");
 
-function inherit(subClass, superClass) {
-	subClass.prototype = new superClass;
-	subClass.prototype.constructor = subClass;
-	subClass.prototype.superConstructor = superClass;
-	subClass.prototype._super = superClass.prototype;
-}
+var inherits = function(child, superCls) {
+	var _super = function() {};
+	_super.prototype = superCls.prototype;
+	child.prototype = new _super();
+};
+
+inherits(Warrior, Player);
 
 function Warrior(playerInfo) {
-	console.log(playerInfo);
-	this.superConstructor.call(this, playerInfo);
+	Player.call(this, playerInfo);
+	this._weapon = playerInfo.weapon;
+	this._armor = playerInfo.armor;
 }
 
-inherit(Warrior, Player);
+Warrior.prototype.attack = function(player) {
+	var armorDefense = 0;
+	if (typeof player._armor != 'undefined') {
+		armorDefense = player._armor.defense;
+	};
+	player._blood -= this._attackPoint + this._weapon.attackPoint - armorDefense;
+
+	return {
+		attacker: this._name,
+		attackee: player._name,
+		attackeeInjury: this._attackPoint + this._weapon.attackPoint,
+		attackeeBlood: player._blood,
+		attackerCareer: this._career,
+		attackeeCareer: player._career,
+		attackerWeapon: this._weapon
+	};
+}
