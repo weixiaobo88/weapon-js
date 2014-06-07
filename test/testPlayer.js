@@ -21,18 +21,6 @@ describe('Player\'s ', function() {
 	});
 
 	describe('info :', function() {
-		it('should return 张三 as playerA name: ', function() {
-			assert.equal('张三', playerAInfo.name);
-		});
-
-		it('should return 100 as playerA blood: ', function() {
-			assert.equal(100, playerAInfo.blood);
-		});
-
-		it('should return 9 as playerA attackPoint', function() {
-			assert.equal(9, playerAInfo.attackPoint);
-		});
-
 		it('should return attack detail once playerA attack playerB', function() {
 			var fightDetail = playerA.attack(playerB);
 			assert.equal('张三', fightDetail.attacker);

@@ -32,3 +32,8 @@ Player.prototype.alive = function() {
 	};
 	return false;
 }
+
+Player.prototype.injuredByFeatureDamage = function(player) {
+	this._blood -= player._weapon.feature.damagePoint;
+	return this._blood;
+}

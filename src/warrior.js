@@ -17,15 +17,19 @@ function Warrior(playerInfo) {
 
 Warrior.prototype.attack = function(player) {
 	var armorDefense = 0;
+	var featureDamage = 0;
 	if (typeof player._armor != 'undefined') {
 		armorDefense = player._armor.defense;
+	};
+	if (typeof this._weapon.feature != 'undefined') {
+		featureDamage = this._weapon.feature.damagePoint;
 	};
 	player._blood -= this._attackPoint + this._weapon.attackPoint - armorDefense;
 
 	return {
 		attacker: this._name,
 		attackee: player._name,
-		attackeeInjury: this._attackPoint + this._weapon.attackPoint,
+		attackeeInjury: this._attackPoint + this._weapon.attackPoint - armorDefense,
 		attackeeBlood: player._blood,
 		attackerCareer: this._career,
 		attackeeCareer: player._career,

@@ -19,19 +19,33 @@ Game.prototype.start = function() {
 	playerA = this._playerA;
 	playerB = this._playerB;
 	fightDetail = new FightDetail();
+
 	while (playerA.alive() && playerB.alive()) {
 		if (playerA.alive()) {
 			attackInfo = playerA.attack(playerB);
-			attackMsg = fightDetail.generateAttackMsg(attackInfo);
-			printer(attackMsg);
+			this.handleAttack(playerB, playerA, attackInfo);
 		}
 		if (playerB.alive()) {
 			attackInfo = playerB.attack(playerA);
-			attackMsg = fightDetail.generateAttackMsg(attackInfo);
-			printer(attackMsg);
+			this.handleAttack(playerA, playerB, attackInfo);
 		}
 	}
 
 	attackResult = fightDetail.generateAttackResult(attackInfo.attackeeBlood > 0 ? attackInfo.attacker : attackInfo.attackee);
 	printer(attackResult);
+}
+
+Game.prototype.handleAttack = function(attackee, attacker, attackInfo) {
+	var fightDetail = new FightDetail();
+
+	var attackMsg = fightDetail.generateAttackMsg(attackInfo);
+	printer(attackMsg);
+
+	if (typeof attackInfo.attackerWeapon != 'undefined' && typeof attackInfo.attackerWeapon.feature != 'undefined') {
+		attackInfo.attackeeBlood = attackee.injuredByFeatureDamage(attacker);
+
+		var featureDamageMsg = fightDetail.generateFeatureDamageMsg(attackInfo);
+
+		printer(featureDamageMsg);
+	};
 }

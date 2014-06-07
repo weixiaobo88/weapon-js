@@ -5,17 +5,13 @@ var Game = require("../src/game.js");
 var Player = require("../src/player.js");
 var Warrior = require("../src/warrior.js");
 var FightDetail = require("../src/fightDetail.js");
+var WEAPON = require("../src/weapon.js");
 
 var CAREER = {
 	NORMAL: "普通人",
 	WARRIOR: "战士"
 };
-var WEAPON = {
-	STICK: {
-		name: "优质木棒",
-		attackPoint: 2
-	}
-};
+
 var ARMOR = {
 	defense: 2
 };
@@ -115,9 +111,9 @@ describe('Game with career: ', function() {
 			game = new Game(warrior, warriorB);
 			sinon.spy(console, "log");
 			game.start();
-			sinon.assert.calledWith(console.log, "战士张三用优质木棒攻击了战士王五,王五受到了11点伤害,王五剩余生命：2");
-			sinon.assert.calledWith(console.log, "战士王五用优质木棒攻击了战士张三,张三受到了10点伤害,张三剩余生命：2");
-			sinon.assert.calledWith(console.log, "战士张三用优质木棒攻击了战士王五,王五受到了11点伤害,王五剩余生命：-6");
+			sinon.assert.calledWith(console.log, "战士张三用优质木棒攻击了战士王五,王五受到了8点伤害,王五剩余生命：2");
+			sinon.assert.calledWith(console.log, "战士王五用优质木棒攻击了战士张三,张三受到了8点伤害,张三剩余生命：2");
+			sinon.assert.calledWith(console.log, "战士张三用优质木棒攻击了战士王五,王五受到了8点伤害,王五剩余生命：-6");
 			sinon.assert.calledWith(console.log, "王五被打败了");
 			console.log.restore();
 		});
