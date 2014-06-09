@@ -9,6 +9,8 @@
 * 战士 fight 普通人, 普通人 fight 战士
 * 战士 fight 战士
 
+### [TODO]武器特性是否触发是随机的
+
 ### [TODO]武器只有一个特性, 伤害不是掉血
 * 战士 fight 普通人, 普通人 fight 战士
 * 战士 fight 战士

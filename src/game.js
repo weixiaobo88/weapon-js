@@ -41,11 +41,17 @@ Game.prototype.handleAttack = function(attackee, attacker, attackInfo) {
 	var attackMsg = fightDetail.generateAttackMsg(attackInfo);
 	printer(attackMsg);
 
-	if (typeof attackInfo.attackerWeapon != 'undefined' && typeof attackInfo.attackerWeapon.feature != 'undefined') {
-		attackInfo.attackeeBlood = attackee.injuredByFeatureDamage(attacker);
+	if (this.isToTriggerFeature()) {
+		if (typeof attackInfo.attackerWeapon != 'undefined' && typeof attackInfo.attackerWeapon.feature != 'undefined') {
+			attackInfo.attackeeBlood = attackee.injuredByFeatureDamage(attacker);
 
-		var featureDamageMsg = fightDetail.generateFeatureDamageMsg(attackInfo);
+			var featureDamageMsg = fightDetail.generateFeatureDamageMsg(attackInfo);
 
-		printer(featureDamageMsg);
+			printer(featureDamageMsg);
+		};
 	};
+}
+
+Game.prototype.isToTriggerFeature = function() {
+	return Math.round(Math.random());
 }
